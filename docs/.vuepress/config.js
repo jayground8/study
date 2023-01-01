@@ -15,7 +15,7 @@ export default defineUserConfig({
             children: [
               {
                 text: 'spring-security',
-                link: 'spring-security.html'
+                link: '/spring/spring-security.html'
               }
             ]
         }
