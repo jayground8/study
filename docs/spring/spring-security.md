@@ -1,5 +1,6 @@
-# 문제 <!-- omit in toc -->
+# Quiz <!-- omit in toc -->
 - [Spring Security를 Component 방식으로 설정을 해보자](#spring-security를-component-방식으로-설정을-해보자)
+- [UserDetailsService와 JPA를 통해서 인증을 해보자](#userdetailsservice와-jpa를-통해서-인증을-해보자)
 
 
 # Spring Security를 Component 방식으로 설정을 해보자
@@ -142,3 +143,120 @@ public class UserManagementConfig {
     }
 }
 ```
+
+# UserDetailsService와 JPA를 통해서 인증을 해보자
+
+`Spring security`에서 UserDetails interface 사용한 구현체와 도메인 내에서 사용할 User를 구분한다.
+
+```java
+@Entity
+@Table(name = "users")
+@NoArgsConstructor
+@Getter
+@Setter
+public class User {
+    @Id @GeneratedValue
+    private Long id;
+    private String username;
+    private String password;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+}
+```
+
+Spring Security를 에서 필요한 `SecurityUser` 클래스를 별도로 만들어서 `User`를 주입하도록 한다.
+
+```java
+public class SecurityUser implements UserDetails {
+    private final User user;
+
+    public SecurityUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String getPassword() {
+        return user.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    // 다른 method는 생략
+}
+```
+
+`CrudRepository` interface를 사용하여 아래와 같이 `username`으로 Query할 수 있도록 추가한다.
+
+```java
+public interface UserRepository extends CrudRepository<User,Long> {
+    Optional<User> findByUsername(String username);
+}
+```
+
+그리고 `UserDetailsService` interface를 사용하여 `JPAUserDetailsService`를 작성하고, Bean에 등록하기 위하여 `@Service` annotation을 사용하여 등록을 했다. 
+
+```java
+@Service
+public class JPAUserDetailsService implements UserDetailsService {
+    private final UserRepository userRepository;
+
+    public JPAUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository
+                .findByUsername(username)
+                .map(SecurityUser::new)
+                .orElseThrow(() -> new UsernameNotFoundException("username not found: " + username));
+    }
+}
+```
+
+이제 `CommanLineRunner`를 통해서 테스트를 위한 user data를 저장한다.
+
+```java
+@SpringBootApplication
+public class Ex02SgApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Ex02SgApplication.class, args);
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(CatRepository catRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        return args -> {
+            userRepository.save(new User("customer", passwordEncoder.encode("secret")));
+        };
+    }
+}
+```
+
+그리고 `PasswordEncoder`를 사용하기 위해서 `PasswordEncoder`를 Bean에 등록한다.
+
+```java
+@Configuration
+public class SecurityConfig {
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        return http
+                .authorizeHttpRequests(auth ->  auth.anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+```
+
+이제 `curl -i -u customer:secret localhost:8080/`를 하면 정상적으로 응답을 받을 수 있다.
