@@ -1,9 +1,9 @@
 # Quiz <!-- omit in toc -->
-- [Spring Security를 Component 방식으로 설정을 해보자](#spring-security를-component-방식으로-설정을-해보자)
-- [UserDetailsService와 JPA를 통해서 인증을 해보자](#userdetailsservice와-jpa를-통해서-인증을-해보자)
+- [Component based configuration](#component-based-configuration)
+- [configure UserDetailsService with JPA](#configure-userdetailsservice-with-jpa)
 
 
-# Spring Security를 Component 방식으로 설정을 해보자
+# Component based configuration
 
 Spring boot `3.0.1`을 사용하였고, 따라서 spring-security-web `6.0.1`를 사용하게 된다. 과거의 많은 예제들이 `WebSecurityConfigurerAdapter` 클래스의 method들을 override하여 설정하는 것으로 나와 있다. 하지만 최근 버전에서는 `WebSecurityConfigurerAdapter`는 Deprecated되었고, Bean에 등록하는 방식으로 Spring security 설정을 하는 것을 지양한다.
 
@@ -144,7 +144,7 @@ public class UserManagementConfig {
 }
 ```
 
-# UserDetailsService와 JPA를 통해서 인증을 해보자
+# configure UserDetailsService with JPA
 
 `Spring security`에서 UserDetails interface 사용한 구현체와 도메인 내에서 사용할 User를 구분한다.
 
