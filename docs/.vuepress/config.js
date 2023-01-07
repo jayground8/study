@@ -14,20 +14,18 @@ export default defineUserConfig({
           link: '/java/',
           children: [
             {
+              text: 'spring',
+              link: '/java/spring.html'
+            },
+            {
+              text: 'spring-security',
+              link: '/java/spring-security.html'
+            },
+            {
               text: 'junit',
               link: '/java/junit.html'
             }
           ]
-        },
-        {
-            text: 'Spring',
-            link: '/spring/',
-            children: [
-              {
-                text: 'spring-security',
-                link: '/spring/spring-security.html'
-              }
-            ]
         },
     ]
   }),
