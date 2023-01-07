@@ -147,17 +147,17 @@ jobs:
 
 해당 Github action의 workflow가 정상적으로 돌고 나면 아래처럼 package가 등록된 것을 확인 할 수 있다.
 
-![deployed maven package](/images/02-deploy-maven-package-to-github-package.png)
+![deployed maven package](/images/spring/02-deploy-maven-package-to-github-package.png)
 
 이렇게 Github package에 등록된 package를 사용하려면 Github classic access token를 발급해야 한다.
 
 > You need an access token to publish, install, and delete private, internal, and public packages.
 
-![github classic access token](/images/04-github-classic-token.png)
+![github classic access token](/images/spring/04-github-classic-token.png)
 
 read package 권한을 부여해서 Github package에 접근할 수 있도록 한다.
 
-![permission scope of access token](/images/05-github-classic-token-package-read-permission.png)
+![permission scope of access token](/images/spring/05-github-classic-token-package-read-permission.png)
 
 그리고 Maven 실행 관련 설정을 위해서 `~/.m2/settings.xml`를 아래처럼 작성한다.
 
@@ -202,7 +202,7 @@ read package 권한을 부여해서 Github package에 접근할 수 있도록 �
 
 해당 package를 사용하는 곳에서 dependency에 정의하면 된다.
 
-![package](/images/03-github-package.png)
+![package](/images/spring/03-github-package.png)
 
 # generate code with openapi-generator-maven-plugin
 
@@ -446,7 +446,7 @@ components:
 
 3. `mvn install`로 최종 jar 파일을 만든다. 아래와 같이 코드가 생성된 것을 확인 할 수 있다.
 
-![generated code](/images/01-spring-openapi-generate-code.png)
+![generated code](/images/spring/01-spring-openapi-generate-code.png)
 
 ```bash
 $ curl -i localhost:8888/cats 

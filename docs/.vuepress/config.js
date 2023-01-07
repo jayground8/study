@@ -10,6 +10,16 @@ export default defineUserConfig({
     // collapsible sidebar
     sidebar: [
         {
+          text: 'Java',
+          link: '/java/',
+          children: [
+            {
+              text: 'junit',
+              link: '/java/junit.html'
+            }
+          ]
+        },
+        {
             text: 'Spring',
             link: '/spring/',
             children: [
@@ -18,7 +28,7 @@ export default defineUserConfig({
                 link: '/spring/spring-security.html'
               }
             ]
-        }
+        },
     ]
   }),
 })
