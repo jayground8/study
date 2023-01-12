@@ -1,4 +1,4 @@
-# Quiz <!-- omit in toc -->
+# List <!-- omit in toc -->
 - [Component based configuration](#component-based-configuration)
 - [configure UserDetailsService with JPA](#configure-userdetailsservice-with-jpa)
 

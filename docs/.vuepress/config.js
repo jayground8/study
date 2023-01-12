@@ -27,6 +27,10 @@ export default defineUserConfig({
             }
           ]
         },
+        {
+          text: 'Nodejs',
+          link: '/nodejs/'
+        }
     ]
   }),
 })

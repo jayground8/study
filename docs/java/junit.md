@@ -1,4 +1,4 @@
-# Quiz <!-- omit in toc -->
+# List <!-- omit in toc -->
 - [Static import](#static-import)
 - [TestInstance lifecycle and @BeforeAll](#testinstance-lifecycle-and-beforeall)
 - [BDD with Cucumber and Junit integration](#bdd-with-cucumber-and-junit-integration)

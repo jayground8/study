@@ -1,4 +1,4 @@
-# Quiz <!-- omit in toc -->
+# List <!-- omit in toc -->
 - [validate request with jakarta api validation](#validate-request-with-jakarta-api-validation)
 - [deploy maven package to Github package](#deploy-maven-package-to-github-package)
 - [generate code with openapi-generator-maven-plugin](#generate-code-with-openapi-generator-maven-plugin)
