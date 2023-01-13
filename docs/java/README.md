@@ -1,4 +1,7 @@
 # List <!-- omit in toc -->
+- [reflection and Java module](#reflection-and-java-module)
+- [Set up Java modules in Intellij](#set-up-java-modules-in-intellij)
+
 
 # reflection and Java module
 
