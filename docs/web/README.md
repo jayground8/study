@@ -73,7 +73,7 @@ messaging.onBackgroundMessage((payload) => {
 
 ![send test notification in Firebase console](/images/web/01-firebase-messaging-campagin-send-test.png)
 
-그래서 아래처럼 Firebase console에서 service account를 발급하고, Firebase Admin SDK를 통해서 push 알림을 보냈다. icon에 보일 image link를 정의해줬고, fcm_options의 link값도 설정하여 알림을 눌렀을 때 해당 링크로 갈 수 있도록 하였다.
+그래서 아래처럼 Firebase console에서 service account를 발급하고, Firebase Admin SDK를 통해서 push 알림을 보냈다. icon에 보일 image link를 정의해줬고, fcm_options의 link값도 설정하여 알림을 눌렀을 때 해당 링크로 갈 수 있도록 하였다. 보낼 수 있는 property는 [mdn web docs](https://developer.mozilla.org/en-US/docs/Web/API/Notification)를 참고한다.
 
 ![create a service account in Firebase console](/images/web/02-firebase-service-account.png)
 
@@ -129,3 +129,5 @@ getMessaging().send(message)
 이제 정상적으로 크롬에서 알림이 image까지 같이 뜨는 것을 확인할 수 있다.
 
 ![push notification](/images/web/04-push-notification-on-mac.png)
+
+Safari에서도 [MacOs 13에서 Safari 16에서 Push API와 Notification API를 지원](https://developer.apple.com/documentation/usernotifications/sending_web_push_notifications_in_safari_and_other_browsers)한다고 나와있지만, FCM으로 push notification을 보내지 못하는 것 같다. [아직 open 상태인 관련된 github issue](https://github.com/firebase/firebase-js-sdk/issues/6620)
