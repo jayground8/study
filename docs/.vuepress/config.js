@@ -30,6 +30,10 @@ export default defineUserConfig({
         {
           text: 'Nodejs',
           link: '/nodejs/'
+        },
+        {
+          text: 'Web',
+          link: '/web/'
         }
     ]
   }),
