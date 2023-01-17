@@ -1,5 +1,6 @@
 # List <!-- omit in toc -->
 - [Web push with Firebase Messaging](#web-push-with-firebase-messaging)
+- [play with form and iframe](#play-with-form-and-iframe)
 
 # Web push with Firebase Messaging
 
@@ -131,3 +132,55 @@ getMessaging().send(message)
 ![push notification](/images/web/04-push-notification-on-mac.png)
 
 Safari에서도 [MacOs 13에서 Safari 16에서 Push API와 Notification API를 지원](https://developer.apple.com/documentation/usernotifications/sending_web_push_notifications_in_safari_and_other_browsers)한다고 나와있지만, FCM으로 push notification을 보내지 못하는 것 같다. [아직 open 상태인 관련된 github issue](https://github.com/firebase/firebase-js-sdk/issues/6620)
+
+# play with form and iframe
+
+[예제](https://github.com/jayground8/study-example/tree/main/example-iframe)
+
+`iframe`은 이제 다른 html page를 보여줄 수 있도록 해준다. form의 속성값중에 target을 `iframe` 이름을 명시하면 `action`에 submit을하고 결과값을 `iframe`에 보여줄 수 있다. 아래 예제코드를 보면 `target="example"`으로 되어 있고, `example`은 iframe의 name 값인 것을 확인할 수 있다.
+
+```html
+<html>
+  <head></head>
+  <body>
+    example
+    <form action="/one" method="post" target="example">
+      <input type="text" name="index" value="index" />
+      <button>submit</button>
+    </form>
+    <iframe name="example" src="/landing"></iframe>
+  </body>
+</html>
+```
+
+이제 submit 버튼을 누르게 되면 `/one` 경로로 `POST` 요청을 하고, 결과값을 iframe에 보여주게 된다. 그리고 iframe에서 iframe을 담고 있는 html에 데이터를 전달할 수도 있다.
+
+`index.html`에서 `message` type의 이벤트를 구독하도록 하고,
+
+```html
+<script>
+  window.addEventListener("message", (e) => {
+    console.log(e.data);
+  })
+</script>
+```
+
+`iframe`에 있는 page에서 아래처럼 postMessage로 데이터를 보내면 이벤트가 발생하여 데이터를 전달 받을 수 있다.
+
+```html
+<script>
+  const btn = document.getElementById("submit");
+  btn.addEventListener("click", () => {
+    window.parent.postMessage("data from iframe");
+  })
+</script>
+```
+
+그리고 `iframe`에서 form으로 이동을 할 때 `target`을 `_parent`으로 하면 부모 페이지에서 페이지 전환이 될 수 있다.
+
+```html
+<form action="/three" method="post" target="_parent">
+  <input type="text" name="two" value="two" />
+  <button id="submit">submit</button>
+</form>
+```
