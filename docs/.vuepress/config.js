@@ -34,6 +34,10 @@ export default defineUserConfig({
         {
           text: 'Web',
           link: '/web/'
+        },
+        {
+          text: 'Extra',
+          link: '/extra/'
         }
     ]
   }),
