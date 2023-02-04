@@ -1,5 +1,7 @@
 # lua-nginx-module를 사용해서 Docker image 만들기
 
+[예제](https://github.com/jayground8/study-example/tree/main/example-nginx-lua)
+
 Nginx Docker image로 간단하게 뭔가 테스트를 해보다가, lua를 사용해서 테스트 시나리오를 만들고 싶었다. 이 간단한 lua 사용을 위해서 Official Nginx docker image 대신에 새로 Dockerfile을 작성하고 Image를 빌드하게 되었다. 하지만 lua-nginx-module을 추가하는 과정은 간단하지 않았다...
 
 엄청난 삽질 끝에 필요한 소스코드를 받아서 build하는 식으로 작성으로 해결이 되었다. 테스트용으로 lua만 사용하면 되기 때문에 Docker layer별로 필요없는 파일을 지우거나, ubuntu대신에 alpine을 사용하거나 하는 것은 크게 신경쓰지 않았다.
