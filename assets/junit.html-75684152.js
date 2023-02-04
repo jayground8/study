@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-4b59eac2","path":"/java/junit.html","title":"List","lang":"ko-KR","frontmatter":{},"headers":[],"git":{"updatedTime":1673530736000,"contributors":[{"name":"jayground8","email":"jayground8@gmail.com","commits":2}]},"filePathRelative":"java/junit.md"}');export{a as data};
